@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book a Car</title>
+</head>
+<body>
+
+  <h2>Book a Car</h2>
+
+  <p>Welcome, <span id="username"></span></p>
+
+  <a href="my-bookings.html">
+    <button>My Bookings</button>
+  </a>
+
+  <button id="logoutBtn">Logout</button>
+
+  <form id="bookingForm">
+    <input type="text" id="carName" placeholder="Car Name" required />
+    <input type="date" id="pickupDate" required />
+    <input type="date" id="dropDate" required />
+    <button type="submit">Book</button>
+  </form>
+
+  <p id="message"></p>
+
+  <!-- PROTECTION FIRST -->
+  <script src="auth.js"></script>
+  <script>
+    protectPage();
+  </script>
+
+  <!-- PAGE LOGIC -->
+  <script src="booking.js"></script>
+
+</body>
+</html>
