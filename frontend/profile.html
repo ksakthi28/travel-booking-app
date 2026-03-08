@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile</title>
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <ul>
+    <li><a href="booking.html">Book a Car</a></li>
+    <li><a href="my-bookings.html">My Bookings</a></li>
+    <li><a href="profile.html" class="active">Profile</a></li>
+    <li><a href="settings.html">Settings</a></li>
+    <li><a href="#" class="nav-logout" onclick="logout()">Logout</a></li>
+  </ul>
+</nav>
+
+<div class="container mt-4">
+  <div class="card" style="max-width: 500px; margin: 0 auto; text-align: center;">
+    
+    <!-- Profile Avatar Placeholder -->
+    <div style="width: 100px; height: 100px; background-color: var(--secondary-color); color: var(--text-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; margin: 0 auto 1.5rem auto;">
+      👤
+    </div>
+    
+    <h2 id="name" style="margin-bottom: 0.5rem;">Loading...</h2>
+    <p id="email" style="color: var(--text-muted); margin-bottom: 2rem;">...</p>
+    
+    <div style="display: flex; gap: 1rem; justify-content: center;">
+      <a href="my-bookings.html" class="btn btn-secondary" style="width: auto;">View My Bookings</a>
+      <a href="settings.html" class="btn" style="width: auto;">Account Settings</a>
+    </div>
+
+    <p id="message" class="message"></p>
+
+  </div>
+</div>
+
+<script src="auth.js"></script>
+<script>
+  protectPage();
+</script>
+<script src="profile.js"></script>
+
+</body>
+</html>

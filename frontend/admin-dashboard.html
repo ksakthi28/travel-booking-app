@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .tabs-bar {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      position: relative;
+    }
+
+    .tab-btn:hover {
+      color: var(--primary-color);
+    }
+
+    .tab-btn.active {
+      color: var(--primary-color);
+    }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -0.65rem;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary-color);
+      border-radius: 3px;
+    }
+
+    .filter-bar {
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-filter {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border-color);
+      background: #fff;
+      color: var(--text-muted);
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition-fast);
+    }
+
+    .btn-filter:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .btn-filter.active {
+      background: var(--primary-color);
+      color: #fff;
+      border-color: var(--primary-color);
+    }
+
+    /* Action Buttons in Table */
+    .action-btn {
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-approve {
+      background-color: var(--success);
+      margin-right: 5px;
+    }
+
+    .btn-reject {
+      background-color: var(--danger);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background-color: var(--bg-card);
+      padding: 2rem;
+      width: 400px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      right: 1.5rem;
+      top: 1.5rem;
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="admin-dashboard.html" class="active">Dashboard</a></li>
+      <li><a href="login.html" class="nav-logout" onclick="logout()">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="admin-container">
+
+    <div class="tabs-bar">
+      <button class="tab-btn active" id="tab-bookings" onclick="switchTab('bookings')">Bookings</button>
+      <button class="tab-btn" id="tab-users" onclick="switchTab('users')">All Users</button>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <!-- BOOKINGS SECTION -->
+    <div id="section-bookings">
+      <div class="filter-bar">
+        <button class="btn-filter active" data-filter="all">All</button>
+        <button class="btn-filter" data-filter="pending">Pending</button>
+        <button class="btn-filter" data-filter="approved">Approved</button>
+        <button class="btn-filter" data-filter="cancelled">Cancelled</button>
+      </div>
+
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Car</th>
+            <th>Route</th>
+            <th>Dates</th>
+            <th>Distance</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="bookingsBody">
+          <tr>
+            <td colspan="8" class="text-center">Loading bookings...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- USERS SECTION -->
+    <div id="section-users" style="display: none;">
+      <div style="margin-bottom: 1.5rem; color: var(--text-muted);">
+        Viewing all registered users in the platform.
+      </div>
+
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email Address</th>
+            <th>Role</th>
+            <th>Verified</th>
+            <th>Joined Date</th>
+          </tr>
+        </thead>
+        <tbody id="usersBody">
+          <tr>
+            <td colspan="5" class="text-center">Loading users...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Approve Modal -->
+  <div id="approveModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeApproveModal">&times;</span>
+      <h3 style="margin-bottom: 0.5rem;">Approve Booking</h3>
+      <p style="color:var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">Set final trip details.</p>
+
+      <form id="approveForm">
+        <input type="hidden" id="approveBookingId" />
+
+        <div class="form-group">
+          <label>Total Distance (km)</label>
+          <input type="number" id="approveDistance" required min="0" step="0.1" placeholder="e.g. 150.5" />
+        </div>
+
+        <div class="form-group mb-4">
+          <label>Final Amount (₹)</label>
+          <input type="number" id="approveAmount" required min="0" step="0.01" placeholder="e.g. 2500" />
+        </div>
+
+        <div style="display: flex; gap: 1rem;">
+          <button type="button" class="btn btn-secondary" onclick="closeApproveModal()"
+            style="margin: 0; flex: 1;">Cancel</button>
+          <button type="submit" class="btn" style="margin: 0; flex: 1; background: var(--success);">Approve</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    protectPage(true);
+  </script>
+  <script src="admin-dashboard.js"></script>
+
+</body>
+
+</html>

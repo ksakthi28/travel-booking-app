@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Login</title>
+</head>
+<body>
+
+  <h2>Admin Login</h2>
+
+  <input type="email" id="email" placeholder="Email" /><br><br>
+  <input type="password" id="password" placeholder="Password" /><br><br>
+
+  <button id="passwordLoginBtn">Login with Password</button>
+  <button id="otpLoginBtn">Login with OTP</button>
+
+  <div id="otpSection" style="display:none;">
+    <br>
+    <input type="text" id="otp" placeholder="Enter OTP" /><br><br>
+    <button id="verifyOtpBtn">Verify OTP</button>
+  </div>
+
+  <p id="message"></p>
+
+  <script src="auth.js"></script>
+  <script>
+    protectServerAccess();
+  </script>
+
+  <script src="admin-login.js"></script>
+
+</body>
+</html>
