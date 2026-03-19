@@ -131,14 +131,16 @@ router.patch("/:id/admin-update", authMiddleware, async (req, res) => {
       return res.status(404).json({ message: "Booking not found" });
     }
 
-    // Update fields
-    if (status) booking.status = status;
-    if (distance) booking.distance = Number(distance);
-    if (amount) booking.amount = Number(amount);
+    // Update fields using updateOne to avoid full document validation (fixes issues with legacy docs)
+    const updateData = {};
+    if (status) updateData.status = status;
+    if (distance) updateData.distance = Number(distance);
+    if (amount) updateData.amount = Number(amount);
 
-    await booking.save();
+    await Booking.updateOne({ _id: req.params.id }, { $set: updateData });
+    const updatedBooking = await Booking.findById(req.params.id);
 
-    res.json({ message: `Booking ${status} successfully`, booking });
+    res.json({ message: `Booking ${status} successfully`, booking: updatedBooking });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Failed to update booking" });
