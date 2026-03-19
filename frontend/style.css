@@ -1,0 +1,353 @@
+/* =========================================================================
+   Travel Booking App - Global CSS System
+   Aesthetic: Premium Dark Pink (#A92372) & Gold (#ffde97)
+   ========================================================================= */
+
+   @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+   /* --- CSS Variables --- */
+   :root {
+     --primary-color: #A92372;      /* Deep pink */
+     --secondary-color: #ffde97;    /* Light gold/yellow */
+     --text-dark: #1e1e1e;          /* Almost black text */
+     --text-muted: #666666;         /* Gray text */
+     --bg-page: #f8f9fa;            /* Off-white background */
+     --bg-card: #ffffff;            /* Pure white background for cards */
+     --border-color: #e0e0e0;       /* Light gray borders */
+     --danger: #dc3545;             /* Red for errors/cancels */
+     --success: #198754;            /* Green for success */
+     --warning: #f0a500;            /* Orange for pending/warnings */
+     
+     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08); /* Soft shadows */
+     --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12); /* Larger drop shadow */
+     --radius-sm: 8px;              /* Soft rounded corners */
+     --radius-lg: 16px;             /* Rounded corners for large elements */
+     
+     --transition-fast: 0.2s ease;
+   }
+   
+   /* --- Global Resets & Typography --- */
+   * {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+   }
+   
+   body {
+     font-family: 'Outfit', sans-serif;
+     background-color: var(--bg-page);
+     color: var(--text-dark);
+     line-height: 1.6;
+   }
+   
+   h1, h2, h3, h4 {
+     font-weight: 700;
+     margin-bottom: 1rem;
+     color: var(--primary-color);
+   }
+   
+   p {
+     margin-bottom: 1rem;
+   }
+   
+   a {
+     color: var(--primary-color);
+     text-decoration: none;
+     font-weight: 600;
+     transition: color var(--transition-fast);
+   }
+   
+   a:hover {
+     color: #831853; /* Darker pink */
+   }
+   
+   /* --- Layout Containers --- */
+   .container {
+     max-width: 800px;
+     margin: 0 auto;
+     padding: 2rem;
+   }
+   
+   /* Used for auth pages (login/register/forgot password) to center a smaller card */
+   .auth-container {
+     max-width: 450px;
+     margin: 4rem auto;
+     padding: 2.5rem;
+     background: var(--bg-card);
+     border-radius: var(--radius-lg);
+     box-shadow: var(--shadow-lg);
+     text-align: center;
+   }
+   
+   /* Standard card used for forms and info displays */
+   .card {
+     background: var(--bg-card);
+     padding: 2rem;
+     border-radius: var(--radius-lg);
+     box-shadow: var(--shadow-sm);
+     margin-bottom: 2rem;
+   }
+   
+   /* --- Forms & Inputs --- */
+   .form-group {
+     margin-bottom: 1.5rem;
+     text-align: left;
+   }
+   
+   label {
+     display: block;
+     font-weight: 600;
+     margin-bottom: 0.5rem;
+     color: var(--text-dark);
+     font-size: 0.95rem;
+   }
+   
+   input[type="text"],
+   input[type="email"],
+   input[type="password"],
+   input[type="tel"],
+   input[type="number"],
+   input[type="date"],
+   select {
+     width: 100%;
+     padding: 0.75rem 1rem;
+     font-family: 'Outfit', sans-serif;
+     font-size: 1rem;
+     color: var(--text-dark);
+     border: 2px solid var(--border-color);
+     border-radius: var(--radius-sm);
+     background-color: #fafafa;
+     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+     outline: none;
+   }
+   
+   input:focus,
+   select:focus {
+     border-color: var(--primary-color);
+     background-color: #fff;
+     box-shadow: 0 0 0 4px rgba(169, 35, 114, 0.1);
+   }
+   
+   /* Special styling for inline inputs (like the Men/Women/Children row) */
+   .input-row {
+     display: flex;
+     gap: 1rem;
+     margin-bottom: 1.5rem;
+   }
+   
+   .input-row .form-group {
+     flex: 1;
+     margin-bottom: 0;
+   }
+   
+   /* --- Buttons --- */
+   .btn {
+     display: inline-block;
+     width: 100%;
+     padding: 0.85rem 1.5rem;
+     font-family: 'Outfit', sans-serif;
+     font-size: 1rem;
+     font-weight: 600;
+     text-align: center;
+     color: #fff;
+     background-color: var(--primary-color);
+     border: none;
+     border-radius: var(--radius-sm);
+     cursor: pointer;
+     transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+     margin-top: 1rem;
+     margin-bottom: 0.5rem;
+   }
+   
+   .btn:hover {
+     background-color: #831853;
+     transform: translateY(-2px);
+     box-shadow: var(--shadow-sm);
+   }
+   
+   .btn:active {
+     transform: translateY(0);
+   }
+   
+   .btn:disabled {
+     background-color: #d18ab2;
+     cursor: not-allowed;
+     transform: none;
+     box-shadow: none;
+   }
+   
+   /* Secondary Button (OTP generation etc.) */
+   .btn-secondary {
+     background-color: #f1f3f5;
+     color: var(--primary-color);
+     border: 2px solid var(--primary-color);
+   }
+   
+   .btn-secondary:hover:not(:disabled) {
+     background-color: var(--primary-color);
+     color: #fff;
+   }
+   
+   /* Danger Button (Cancels) */
+   .btn-danger {
+     background-color: var(--danger);
+   }
+   
+   .btn-danger:hover:not(:disabled) {
+     background-color: #b02a37;
+   }
+   
+   /* Small buttons for list items */
+   .btn-sm {
+     width: auto;
+     padding: 0.5rem 1rem;
+     font-size: 0.85rem;
+     margin-top: 0.5rem;
+   }
+   
+   /* --- Messages & Alerts --- */
+   .message {
+     margin-top: 1rem;
+     padding: 0.75rem;
+     border-radius: var(--radius-sm);
+     font-weight: 600;
+     font-size: 0.95rem;
+     text-align: center;
+     display: none; /* Hide empty messages entirely if possible, but JS handles text content usually */
+   }
+   
+   .message:not(:empty) {
+     display: block;
+   }
+   
+   .error-text {
+     color: var(--danger);
+   }
+   
+   .success-text {
+     color: var(--success);
+   }
+   
+   /* --- Bookings List Styling (my-bookings.html) --- */
+   .booking-item {
+     padding: 1.5rem;
+     border: 1px solid var(--border-color);
+     border-radius: var(--radius-sm);
+     margin-bottom: 1.5rem;
+     background: #fff;
+     transition: box-shadow var(--transition-fast);
+     display: grid;
+     grid-template-columns: 1fr;
+     gap: 0.5rem;
+   }
+   
+   .booking-item:hover {
+     box-shadow: var(--shadow-sm);
+     border-color: #d0d0d0;
+   }
+   
+   .booking-item .booking-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     border-bottom: 1px solid var(--border-color);
+     padding-bottom: 1rem;
+     margin-bottom: 1rem;
+   }
+   
+   .booking-item .booking-header h3 {
+     margin: 0;
+     color: var(--text-dark);
+     font-size: 1.25rem;
+   }
+   
+   .booking-item .booking-details {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+     gap: 1rem;
+     margin-bottom: 1rem;
+   }
+   
+   .booking-item p {
+     margin: 0;
+     font-size: 0.95rem;
+   }
+   
+   .booking-item strong {
+     color: var(--text-muted);
+     font-weight: 600;
+     display: inline-block;
+     width: 100px;
+   }
+   
+   /* Status Badges */
+   .status-badge {
+     display: inline-block;
+     padding: 0.25rem 0.75rem;
+     border-radius: 50px;
+     font-size: 0.8rem;
+     font-weight: 700;
+     text-transform: uppercase;
+     letter-spacing: 0.5px;
+   }
+   
+   .status-badge.pending {
+     background-color: rgba(240, 165, 0, 0.15);
+     color: var(--warning);
+   }
+   
+   .status-badge.approved {
+     background-color: rgba(25, 135, 84, 0.15);
+     color: var(--success);
+   }
+   
+   .status-badge.cancelled {
+     background-color: rgba(220, 53, 69, 0.15);
+     color: var(--danger);
+   }
+   
+   /* --- Utilities --- */
+   .text-center { text-align: center; }
+   .mt-1 { margin-top: 0.5rem; }
+   .mt-2 { margin-top: 1rem; }
+   .mt-3 { margin-top: 1.5rem; }
+   .mt-4 { margin-top: 2rem; }
+   .mb-1 { margin-bottom: 0.5rem; }
+   .mb-2 { margin-bottom: 1rem; }
+   .mb-3 { margin-bottom: 1.5rem; }
+   .mb-4 { margin-bottom: 2rem; }
+   
+   /* --- Admin Table Override --- */
+   .admin-table {
+     width: 100%;
+     border-collapse: separate;
+     border-spacing: 0;
+     border-radius: var(--radius-sm);
+     overflow: hidden;
+     box-shadow: var(--shadow-sm);
+     background: #fff;
+     margin-top: 1.5rem;
+   }
+   
+   .admin-table th, .admin-table td {
+     padding: 1rem;
+     text-align: left;
+     border-bottom: 1px solid var(--border-color);
+   }
+   
+   .admin-table th {
+     background-color: #fafafa;
+     color: var(--text-dark);
+     font-weight: 700;
+     text-transform: uppercase;
+     font-size: 0.85rem;
+     letter-spacing: 0.5px;
+   }
+   
+   .admin-table tbody tr:last-child td {
+     border-bottom: none;
+   }
+   
+   .admin-table tbody tr:hover {
+     background-color: #fcfcfc;
+   }

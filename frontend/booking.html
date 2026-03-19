@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Car - Premium Travel</title>
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <ul>
+    <li><a href="booking.html" class="active">Book a Car</a></li>
+    <li id="navMyBookings" style="display:none;"><a href="my-bookings.html">My Bookings</a></li>
+    <li id="navProfile" style="display:none;"><a href="profile.html">Profile</a></li>
+    <li id="navSettings" style="display:none;"><a href="settings.html">Settings</a></li>
+    <li id="navAuthItem"><a href="javascript:openAuthModal('login')" class="nav-logout">Login</a></li>
+  </ul>
+</nav>
+
+<div class="container mt-4">
+  <div class="card" style="max-width: 800px; margin: 0 auto; padding: 2.5rem;">
+    
+    <div class="text-center mb-4">
+      <h2>Plan Your Trip 🗺️</h2>
+      <p style="color:var(--text-muted); font-size:0.95rem;">Fill in the details below to request a car.</p>
+    </div>
+
+    <form id="bookingForm">
+      
+      <!-- Section 1: Contact Info -->
+      <h3 style="font-size: 1.1rem; border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; margin-top: 1.5rem;">1. Contact Details</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label for="bookingName">Full Name</label>
+          <input type="text" id="bookingName" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="mobile">Mobile Number</label>
+          <input type="tel" id="mobile" placeholder="e.g. 9876543210" required>
+        </div>
+      </div>
+
+      <!-- Section 2: Journey Info -->
+      <h3 style="font-size: 1.1rem; border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; margin-top: 1.5rem;">2. Journey Details</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label for="fromPlace">Pickup Location</label>
+          <input type="text" id="fromPlace" placeholder="e.g. Mumbai" required>
+        </div>
+        <div class="form-group">
+          <label for="toPlace">Drop Location</label>
+          <input type="text" id="toPlace" placeholder="e.g. Pune" required>
+        </div>
+        <div class="form-group">
+          <label for="pickupDate">Date of Travel</label>
+          <input type="date" id="pickupDate" required>
+        </div>
+        <div class="form-group">
+          <label for="seats">Car Type (Seats)</label>
+          <select id="seats" required>
+            <option value="">Select an option...</option>
+            <option value="4">4 Seater (Sedan)</option>
+            <option value="6">6 Seater (SUV)</option>
+            <option value="7">7 Seater (Large SUV)</option>
+            <option value="10">10 Seater (Mini Bus)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Section 3: Passenger Info -->
+      <h3 style="font-size: 1.1rem; border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; margin-top: 1.5rem;">3. Passenger Breakdown</h3>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; align-items: end;">
+        <div class="form-group" style="margin-bottom:0;">
+          <label for="peopleCount">Total People</label>
+          <input type="number" id="peopleCount" min="1" required style="background:#f0f0f0; border-color:#ccc;" placeholder="e.g. 4">
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label for="menCount" style="color:var(--text-muted); font-weight:normal;">Men</label>
+          <input type="number" id="menCount" min="0" value="0" required>
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label for="womenCount" style="color:var(--text-muted); font-weight:normal;">Women</label>
+          <input type="number" id="womenCount" min="0" value="0" required>
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label for="childrenCount" style="color:var(--text-muted); font-weight:normal;">Children</label>
+          <input type="number" id="childrenCount" min="0" value="0" required>
+        </div>
+      </div>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.5rem; margin-bottom: 2rem;">Total people should equal the sum of men, women, and children.</p>
+
+      <button type="submit" id="submitBookingBtn" class="btn" style="font-size: 1.1rem; padding: 1rem;">Confirm Booking Request</button>
+      <p id="message" class="message"></p>
+
+    </form>
+  </div>
+</div>
+
+<script src="auth.js"></script>
+<script src="auth-modal.js"></script>
+<script>
+  if (getToken()) {
+    document.getElementById("navMyBookings").style.display = "inline-block";
+    document.getElementById("navProfile").style.display = "inline-block";
+    document.getElementById("navSettings").style.display = "inline-block";
+    document.getElementById("navAuthItem").innerHTML = '<a href="javascript:void(0)" class="nav-logout" onclick="logout()">Logout</a>';
+  }
+</script>
+<script src="booking.js"></script>
+
+</body>
+</html>
